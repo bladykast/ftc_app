@@ -38,10 +38,10 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
-@Disabled
-@Autonomous(name="Full Power Auto", group="Pushbot")
+//@Disabled
+@Autonomous(name="Just Forward Auto", group="Pushbot")
 
-public class ENGO extends LinearOpMode {
+public class ENGO_Forward extends LinearOpMode {
 
     /* Declare OpMode members. */
     ENHardware         robot   = new ENHardware();   // Use a Pushbot's hardware
@@ -70,40 +70,26 @@ public class ENGO extends LinearOpMode {
 
         // Step through each leg of the path, ensuring that the Auto mode has not been stopped along the way
 
-        // Step 1: Strafe for 3 seconds
-        robot.strafe.setPower(TURN_SPEED);
+        // Step 1: Forward for 1 seconds
+        robot.rightSideFront.setPower(FORWARD_SPEED);
+        robot.rightSideBack.setPower(FORWARD_SPEED);
+        robot.leftSideFront.setPower(FORWARD_SPEED);
+        robot.leftSideFront.setPower(FORWARD_SPEED);
+
         runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 3.0)) {
+        while (opModeIsActive() && (runtime.seconds() < 1.0)) {
             telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
             telemetry.update();
         }
 
-        // Step 2:  Do nothing
-        //robot.leftSide.setPower(0);
-        //robot.rightSide.setPower(0);
-        robot.strafe.setPower(0);
-        runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 1.3)) {
-            telemetry.addData("Path", "Leg 2: %2.5f S Elapsed", runtime.seconds());
-            telemetry.update();
-        }
-
-        // Step 3:  Drive Backwards for 1 Second
-        //robot.leftSide.setPower(-FORWARD_SPEED);
-        //robot.rightSide.setPower(-FORWARD_SPEED);
-        runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 1.1)) {
-            telemetry.addData("Path", "Leg 3: %2.5f S Elapsed", runtime.seconds());
-            telemetry.update();
-        }
-
         // Step 4: Stop
-        //.leftSide.setPower(0);
-        //robot.rightSide.setPower(0);
-        robot.strafe.setPower(0);
+        robot.rightSideFront.setPower(0);
+        robot.rightSideBack.setPower(0);
+        robot.leftSideFront.setPower(0);
+        robot.leftSideFront.setPower(0);
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
-        sleep(1000);
+        sleep(30000);
     }
 }
