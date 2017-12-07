@@ -24,6 +24,8 @@ public class TeleOp_Comp extends OpMode {
 	double jewelPosition;
 	double glyphdumpPosition;
 	double clawPosition;
+	double glyleftPosition;
+	double glyrightPosition;
 
 	double jewelUp = 1;
 	double jewelDown = 0.5;
@@ -38,14 +40,16 @@ public class TeleOp_Comp extends OpMode {
 	DcMotor leftSideFront;
 	DcMotor leftSideBack;
     DcMotor glyphlift;
-	//DcMotor glyph1;
-	//DcMotor glyph2;
+	DcMotor glyphleft;
+	DcMotor glyphright;
 
 	//CRServo relicIO;
 	//CRServo relicUD;
 
 	Servo glyphdump;
-    Servo jewel;
+    //Servo jewel;
+    Servo glyleft;
+    Servo glyright;
     //Servo claw;
 
 
@@ -62,11 +66,14 @@ public class TeleOp_Comp extends OpMode {
 		leftSideFront = hardwareMap.dcMotor.get("MLF");
 		leftSideBack = hardwareMap.dcMotor.get("MLB");
 		glyphlift = hardwareMap.dcMotor.get("LFT");
-        //glyph1 = hardwareMap.dcMotor.get("GLY1");
-        //glyph2 = hardwareMap.dcMotor.get("GLY2");
+        glyphleft = hardwareMap.dcMotor.get("GLYL");
+        glyphright = hardwareMap.dcMotor.get("GLYR");
 
-        jewel = hardwareMap.servo.get("JWL");
+        //jewel = hardwareMap.servo.get("JWL");
         glyphdump = hardwareMap.servo.get("GLY");
+		glyleft = hardwareMap.servo.get("GLYSL");
+		glyright = hardwareMap.servo.get("GLYSR");
+
         //claw = hardwareMap.servo.get("CLAW");
 
         //relicIO = hardwareMap.crservo.get("RIO");
@@ -76,19 +83,27 @@ public class TeleOp_Comp extends OpMode {
 		rightSideBack.setDirection(DcMotor.Direction.REVERSE);
 		leftSideFront.setDirection(DcMotor.Direction.REVERSE);
 		leftSideBack.setDirection(DcMotor.Direction.FORWARD);
-		strafe.setDirection(DcMotor.Direction.FORWARD);
+		strafe.setDirection(DcMotor.Direction.REVERSE);
         glyphlift.setDirection(DcMotor.Direction.FORWARD);
-        //glyph1.setDirection(DcMotor.Direction.FORWARD);
-        //glyph2.setDirection(DcMotor.Direction.FORWARD);
+        glyphleft.setDirection(DcMotor.Direction.FORWARD);
+        glyphright.setDirection(DcMotor.Direction.FORWARD);
 
-		jewelPosition = 1;
-		glyphdumpPosition = 0.1;
+		//jewelPosition = 1;
+		glyphdumpPosition = 1;
 		clawPosition = 0.1;
+
+
+		//NOT LEGAL DO NOT KEEP THIS CODE FOR COMPETITION
+
+		glyleft.setPosition(1);
+		glyright.setPosition(0);
+
 
 	}
 
 	public void loop()
 	{
+
 		float y1 = gamepad1.left_stick_y;
 		float y2 = gamepad1.right_stick_y;
 		float y3 = gamepad2.left_stick_y;
@@ -141,7 +156,7 @@ public class TeleOp_Comp extends OpMode {
 		//}
 
         //Glyph Code
-
+			//Gamepad 2
 		if (gamepad2.x)
 		{
 			glyphdumpPosition = glyphdumpUp;
@@ -151,21 +166,22 @@ public class TeleOp_Comp extends OpMode {
 			glyphdumpPosition = glyphdumpDown;
 		}
 
-        //if (gamepad1.left_bumper)
-        //{
-        //    glyph1.setPower(-1);
-        //    glyph2.setPower(-1);
-        //}
-        //else if (gamepad1.right_bumper)
-        //{
-        //    glyph1.setPower(1);
-        //    glyph2.setPower(1);
-        //}
-        //else
-        //{
-        //    glyph1.setPower(0);
-        //   glyph2.setPower(0);
-        //}
+			//Gamepad 1
+        if (gamepad1.left_bumper)
+        {
+            glyphleft.setPower(-1);
+            glyphright.setPower(-1);
+        }
+        else if (gamepad1.right_bumper)
+        {
+            glyphleft.setPower(1);
+            glyphright.setPower(1);
+        }
+        else
+        {
+            glyphleft.setPower(0);
+            glyphright.setPower(0);
+        }
 
 
 		//Relic Code
@@ -209,12 +225,12 @@ public class TeleOp_Comp extends OpMode {
         //glyphdumpPosition = Range.clip(glyphdumpPosition, GLYPHDUMP_MIN_RANGE, GLYPHDUMP_MAX_RANGE);
 
 
-		jewel.setPosition(jewelPosition);
+		//jewel.setPosition(jewelPosition);
         //claw.setPosition(clawPosition);
         glyphdump.setPosition(glyphdumpPosition);
 
 		telemetry.addData("Text", "*** Robot Data***");
-		telemetry.addData("jewel", "jewel:  " + String.format("%.2f", jewelPosition));
+		//telemetry.addData("jewel", "jewel:  " + String.format("%.2f", jewelPosition));
         //telemetry.addData("claw", "claw:  " + String.format("%.2f", clawPosition));
 		telemetry.addData("glyph", "glyph:  " + String.format("%.2f", glyphdumpPosition));
 	}
