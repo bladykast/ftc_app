@@ -102,12 +102,8 @@ public class TeleOp_Comp extends OpMode {
 		glyphdumpPosition = 1;
 		clawPosition = 0.1;
 		jewel.setPosition(1);
-
-		//NOT LEGAL DO NOT KEEP THIS CODE FOR COMPETITION
-
-
-		glyleft.setPosition(1);
-		glyright.setPosition(0);
+        glyleftPosition = 1;
+        glyrightPosition = 0;
 
 
 	}
@@ -279,6 +275,8 @@ public class TeleOp_Comp extends OpMode {
 		//telemetry.addData("jewel", "jewel:  " + String.format("%.2f", jewelPosition));
         //telemetry.addData("claw", "claw:  " + String.format("%.2f", clawPosition));
 		telemetry.addData("glyph", "glyph:  " + String.format("%.2f", glyphdumpPosition));
+        telemetry.addData("glyleft", "glyph:  " + String.format("%.2f", glyleftPosition));
+		telemetry.addData("glyright", "glyph:  " + String.format("%.2f", glyrightPosition));
 		telemetry.addData("Motor Speed", "Speed:  " + String.format("%.2f", MOTOR_SPEED));
 	}
 
