@@ -16,21 +16,31 @@ import org.firstinspires.ftc.robotcontroller.external.samples.ConceptRampMotorSp
 public class TeleOp_Comp extends OpMode {
 
 
-	final static double JEWEL_MIN_RANGE  = 0;
-	final static double JEWEL_MAX_RANGE  = 1;
+	//final static double JEWEL_MIN_RANGE  = 0;
+	//final static double JEWEL_MAX_RANGE  = 1;
 	final static double GLYPHDUMP_MIN_RANGE  = 0;
 	final static double GLYPHDUMP_MAX_RANGE  = 1;
 
-	double jewelPosition;
+	double MAX_SPEED = 1;
+	double MIN_SPEED = 0.4;
+	double MOTOR_SPEED = 1;
+
+	boolean slow = true;
+
+	//double jewelPosition;
 	double glyphdumpPosition;
 	double clawPosition;
-	double glyleftPosition;
 	double glyrightPosition;
+	double glyleftPosition;
 
-	double jewelUp = 1;
-	double jewelDown = 0.5;
+	//double jewelUp = 1;
+	//double jewelDown = 0.5;
 	double glyphdumpUp = 0.1;
     double glyphdumpDown = 1;
+    double glyrightUp = 0.1;
+    double glyrightDown = 0;
+    double glyleftUp = 0.9;
+    double glyleftDown = 1;
     double clawIn;
     double clawOut;
 
@@ -47,7 +57,7 @@ public class TeleOp_Comp extends OpMode {
 	//CRServo relicUD;
 
 	Servo glyphdump;
-    //Servo jewel;
+    Servo jewel;
     Servo glyleft;
     Servo glyright;
     //Servo claw;
@@ -69,7 +79,7 @@ public class TeleOp_Comp extends OpMode {
         glyphleft = hardwareMap.dcMotor.get("GLYL");
         glyphright = hardwareMap.dcMotor.get("GLYR");
 
-        //jewel = hardwareMap.servo.get("JWL");
+        jewel = hardwareMap.servo.get("JWL");
         glyphdump = hardwareMap.servo.get("GLY");
 		glyleft = hardwareMap.servo.get("GLYSL");
 		glyright = hardwareMap.servo.get("GLYSR");
@@ -91,9 +101,10 @@ public class TeleOp_Comp extends OpMode {
 		//jewelPosition = 1;
 		glyphdumpPosition = 1;
 		clawPosition = 0.1;
-
+		jewel.setPosition(1);
 
 		//NOT LEGAL DO NOT KEEP THIS CODE FOR COMPETITION
+
 
 		glyleft.setPosition(1);
 		glyright.setPosition(0);
@@ -124,12 +135,31 @@ public class TeleOp_Comp extends OpMode {
 		y4 = (float)scaleInput(y4);
 
 
+
+		//High-Low Speed Code
+
+		if (gamepad1.a) {
+			slow = true;
+		}
+
+		if (gamepad1.x) {
+			slow = false;
+		}
+
+		if (slow) {
+			MOTOR_SPEED = MIN_SPEED;
+		}
+		if (!slow) {
+			MOTOR_SPEED = MAX_SPEED;
+		}
+
+
 		//Drivetrain Code
 
-		leftSideFront.setPower(y1);
-		leftSideBack.setPower(y1);
-		rightSideFront.setPower(y2);
-		rightSideBack.setPower(y2);
+		leftSideFront.setPower(y1 * MOTOR_SPEED);
+		leftSideBack.setPower(y1 * MOTOR_SPEED);
+		rightSideFront.setPower(y2 * MOTOR_SPEED);
+		rightSideBack.setPower(y2 * MOTOR_SPEED);
 		glyphlift.setPower(y3);
 
 		if (gamepad1.dpad_left)
@@ -154,6 +184,7 @@ public class TeleOp_Comp extends OpMode {
 		//{
 		//	jewelPosition = jewelDown;
 		//}
+
 
         //Glyph Code
 			//Gamepad 2
@@ -182,6 +213,19 @@ public class TeleOp_Comp extends OpMode {
             glyphleft.setPower(0);
             glyphright.setPower(0);
         }
+
+        if (gamepad1.y)
+        {
+            glyrightPosition = glyrightUp;
+            glyleftPosition = glyleftUp;
+        }
+        if (gamepad1.b)
+        {
+            glyrightPosition = glyrightDown;
+            glyleftPosition = glyleftDown;
+        }
+
+
 
 
 		//Relic Code
@@ -227,12 +271,15 @@ public class TeleOp_Comp extends OpMode {
 
 		//jewel.setPosition(jewelPosition);
         //claw.setPosition(clawPosition);
+        glyleft.setPosition(glyleftPosition);
+        glyright.setPosition(glyrightPosition);
         glyphdump.setPosition(glyphdumpPosition);
 
 		telemetry.addData("Text", "*** Robot Data***");
 		//telemetry.addData("jewel", "jewel:  " + String.format("%.2f", jewelPosition));
         //telemetry.addData("claw", "claw:  " + String.format("%.2f", clawPosition));
 		telemetry.addData("glyph", "glyph:  " + String.format("%.2f", glyphdumpPosition));
+		telemetry.addData("Motor Speed", "Speed:  " + String.format("%.2f", MOTOR_SPEED));
 	}
 
 
