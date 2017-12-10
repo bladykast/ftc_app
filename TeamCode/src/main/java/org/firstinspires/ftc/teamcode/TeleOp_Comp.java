@@ -98,10 +98,14 @@ public class TeleOp_Comp extends OpMode {
         glyphleft.setDirection(DcMotor.Direction.FORWARD);
         glyphright.setDirection(DcMotor.Direction.FORWARD);
 
-		//jewelPosition = 1;
+        jewel.setPosition(1);
+        glyphdump.setPosition(1);
+        glyright.setPosition(0);
+        glyleft.setPosition(1);
+        
+        //jewelPosition = 1;
 		glyphdumpPosition = 1;
 		clawPosition = 0.1;
-		jewel.setPosition(1);
         glyleftPosition = 1;
         glyrightPosition = 0;
 
