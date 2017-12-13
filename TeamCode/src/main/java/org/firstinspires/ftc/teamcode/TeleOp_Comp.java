@@ -4,8 +4,10 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.DeviceInterfaceModule;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
@@ -15,6 +17,7 @@ import org.firstinspires.ftc.robotcontroller.external.samples.ConceptRampMotorSp
 
 public class TeleOp_Comp extends OpMode {
 
+	SeriousHardware robot  = new SeriousHardware();
 
 	//final static double JEWEL_MIN_RANGE  = 0;
 	//final static double JEWEL_MAX_RANGE  = 1;
@@ -27,11 +30,7 @@ public class TeleOp_Comp extends OpMode {
 
 	boolean slow = true;
 
-	//double jewelPosition;
-	double glyphdumpPosition;
-	double clawPosition;
-	double glyrightPosition;
-	double glyleftPosition;
+    public double jewelPosition, glyphdumpPosition, glyrightPosition, glyleftPosition, clawPosition;
 
 	//double jewelUp = 1;
 	//double jewelDown = 0.5;
@@ -44,24 +43,10 @@ public class TeleOp_Comp extends OpMode {
     double clawIn;
     double clawOut;
 
-	DcMotor strafe;
-	DcMotor rightSideFront;
-	DcMotor rightSideBack;
-	DcMotor leftSideFront;
-	DcMotor leftSideBack;
-    DcMotor glyphlift;
-	DcMotor glyphleft;
-	DcMotor glyphright;
-
-	//CRServo relicIO;
-	//CRServo relicUD;
-
-	Servo glyphdump;
-    Servo jewel;
-    Servo glyleft;
-    Servo glyright;
-    //Servo claw;
-
+    DcMotor  rightSideFront, rightSideBack, leftSideFront, leftSideBack, strafe, glyphlift, glyphright, glyphleft;
+    Servo  glyphdump, jewel, glyright, glyleft;
+    DeviceInterfaceModule cdim;
+    ColorSensor sensorRGB;
 
 	public TeleOp_Comp() {
 
@@ -69,48 +54,8 @@ public class TeleOp_Comp extends OpMode {
 
 	@Override
 	public void init() {
-
-		strafe = hardwareMap.dcMotor.get("STR");
-		rightSideFront = hardwareMap.dcMotor.get("MRF");
-		rightSideBack = hardwareMap.dcMotor.get("MRB");
-		leftSideFront = hardwareMap.dcMotor.get("MLF");
-		leftSideBack = hardwareMap.dcMotor.get("MLB");
-		glyphlift = hardwareMap.dcMotor.get("LFT");
-        glyphleft = hardwareMap.dcMotor.get("GLYL");
-        glyphright = hardwareMap.dcMotor.get("GLYR");
-
-        jewel = hardwareMap.servo.get("JWL");
-        glyphdump = hardwareMap.servo.get("GLY");
-		glyleft = hardwareMap.servo.get("GLYSL");
-		glyright = hardwareMap.servo.get("GLYSR");
-
-        //claw = hardwareMap.servo.get("CLAW");
-
-        //relicIO = hardwareMap.crservo.get("RIO");
-        //relicUD = hardwareMap.crservo.get("RUD");
-
-		rightSideFront.setDirection(DcMotor.Direction.FORWARD);
-		rightSideBack.setDirection(DcMotor.Direction.REVERSE);
-		leftSideFront.setDirection(DcMotor.Direction.REVERSE);
-		leftSideBack.setDirection(DcMotor.Direction.FORWARD);
-		strafe.setDirection(DcMotor.Direction.REVERSE);
-        glyphlift.setDirection(DcMotor.Direction.FORWARD);
-        glyphleft.setDirection(DcMotor.Direction.FORWARD);
-        glyphright.setDirection(DcMotor.Direction.FORWARD);
-
-        jewel.setPosition(1);
-        glyphdump.setPosition(1);
-        glyright.setPosition(0);
-        glyleft.setPosition(1);
-        
-        //jewelPosition = 1;
-		glyphdumpPosition = 1;
-		clawPosition = 0.1;
-        glyleftPosition = 1;
-        glyrightPosition = 0;
-
-
-	}
+        robot.init(hardwareMap);
+    }
 
 	public void loop()
 	{
