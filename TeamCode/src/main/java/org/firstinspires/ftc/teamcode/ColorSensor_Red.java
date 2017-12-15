@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DeviceInterfaceModule;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.hardware.adafruit.AdafruitI2cColorSensor;
 
 
 /**
@@ -20,7 +21,7 @@ public class ColorSensor_Red extends LinearOpMode {
     DcMotor rightSideFront, rightSideBack, leftSideFront, leftSideBack, strafe, glyphlift, glyphright, glyphleft;
     Servo glyphdump, jewel, glyright, glyleft;
     DeviceInterfaceModule cdim;
-    ColorSensor sensorRGB;
+    AdafruitI2cColorSensor sensorRGB;
 
     boolean Red = true;
     boolean Blue = false;
@@ -45,7 +46,7 @@ public class ColorSensor_Red extends LinearOpMode {
         glyleft = hardwareMap.servo.get("GLYSL");
         glyright = hardwareMap.servo.get("GLYSR");
 
-        sensorRGB = hardwareMap.colorSensor.get("sensor_color");
+        sensorRGB = (AdafruitI2cColorSensor)hardwareMap.get("sensor_color");
 
         jewel.setPosition(1);
         glyphdump.setPosition(1);

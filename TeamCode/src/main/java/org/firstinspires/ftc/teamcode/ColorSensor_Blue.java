@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.adafruit.AdafruitI2cColorSensor;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
@@ -22,7 +23,7 @@ public class ColorSensor_Blue extends LinearOpMode {
     DcMotor  rightSideFront, rightSideBack, leftSideFront, leftSideBack, strafe, glyphlift, glyphright, glyphleft;
     Servo  glyphdump, jewel, glyright, glyleft;
     DeviceInterfaceModule cdim;
-    ColorSensor sensorRGB;
+    AdafruitI2cColorSensor sensorRGB;
 
     boolean Blue = true;
     boolean Red = false;
@@ -46,7 +47,7 @@ public class ColorSensor_Blue extends LinearOpMode {
         glyleft = hardwareMap.servo.get("GLYSL");
         glyright = hardwareMap.servo.get("GLYSR");
 
-        sensorRGB = hardwareMap.colorSensor.get("sensor_color");
+        sensorRGB = (AdafruitI2cColorSensor)hardwareMap.get("sensor_color");
 
         jewel.setPosition(1);
         glyphdump.setPosition(1);
