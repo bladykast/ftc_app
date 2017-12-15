@@ -32,6 +32,8 @@ public class ColorSensor_Red extends LinearOpMode {
 
         robot.init(hardwareMap);
 
+        robot.init(hardwareMap);
+
         strafe = hardwareMap.dcMotor.get("STR");
         rightSideFront = hardwareMap.dcMotor.get("MRF");
         rightSideBack = hardwareMap.dcMotor.get("MRB");
@@ -48,6 +50,12 @@ public class ColorSensor_Red extends LinearOpMode {
 
         sensorRGB = hardwareMap.colorSensor.get("sensor_color");
 
+        jewel.setPosition(1);
+        glyphdump.setPosition(1);
+        glyright.setPosition(0.45);
+        glyleft.setPosition(0.55);
+
+
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Status", "Ready to run");    //
         telemetry.update();
@@ -61,13 +69,12 @@ public class ColorSensor_Red extends LinearOpMode {
 
         sleep(2000);
 
-        if (sensorRGB.red() > 100){
+        if (sensorRGB.red() > sensorRGB.blue()) {
             rightSideBack.setPower(0.4);
             leftSideBack.setPower(0.4);
             rightSideFront.setPower(0.4);
             leftSideBack.setPower(0.4);
-        }
-        else if (sensorRGB.red() < 100){
+        } else {
             rightSideBack.setPower(-0.4);
             leftSideBack.setPower(-0.4);
             rightSideFront.setPower(-0.4);

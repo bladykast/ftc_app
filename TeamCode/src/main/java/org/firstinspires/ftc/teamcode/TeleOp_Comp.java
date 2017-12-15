@@ -55,6 +55,30 @@ public class TeleOp_Comp extends OpMode {
 	@Override
 	public void init() {
         robot.init(hardwareMap);
+
+		strafe = hardwareMap.dcMotor.get("STR");
+		rightSideFront = hardwareMap.dcMotor.get("MRF");
+		rightSideBack = hardwareMap.dcMotor.get("MRB");
+		leftSideFront = hardwareMap.dcMotor.get("MLF");
+		leftSideBack = hardwareMap.dcMotor.get("MLB");
+		glyphlift = hardwareMap.dcMotor.get("LFT");
+		glyphleft = hardwareMap.dcMotor.get("GLYL");
+		glyphright = hardwareMap.dcMotor.get("GLYR");
+
+		jewel = hardwareMap.servo.get("JWL");
+		glyphdump = hardwareMap.servo.get("GLY");
+		glyleft = hardwareMap.servo.get("GLYSL");
+		glyright = hardwareMap.servo.get("GLYSR");
+
+		sensorRGB = hardwareMap.colorSensor.get("sensor_color");
+
+        jewel.setPosition(1);
+        glyphdump.setPosition(1);
+        glyright.setPosition(0.45);
+        glyleft.setPosition(0.55);
+
+        jewelPosition = 1;
+        glyphdumpPosition = 1;
     }
 
 	public void loop()
