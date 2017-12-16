@@ -67,6 +67,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
  */
 
 @Autonomous(name="VuMark Test", group ="Concept")
+@Disabled
 
 public class Vumark_Test extends LinearOpMode {
 

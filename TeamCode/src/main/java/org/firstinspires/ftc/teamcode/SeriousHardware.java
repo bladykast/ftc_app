@@ -127,6 +127,13 @@ public class SeriousHardware
         glyphleft.setDirection(DcMotor.Direction.FORWARD);
         glyphright.setDirection(DcMotor.Direction.FORWARD);
 
+        leftSideFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftSideFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftSideFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftSideFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftSideFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+
         jewel.setPosition(1);
         glyphdump.setPosition(1);
         glyright.setPosition(0);

@@ -3,35 +3,33 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.hardware.adafruit.AdafruitI2cColorSensor;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DeviceInterfaceModule;
-import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
 
 /**
  * Created by 7t.qr on 12/13/2017.
  */
 
-@Autonomous(name="Blue", group ="Concept")
-public class ColorSensor_Blue extends LinearOpMode {
+@Autonomous(name="Red Stationary", group ="Autonomous")
+public class ColorSensor_RedPark extends LinearOpMode {
 
-    SeriousHardware robot  = new SeriousHardware();
+    SeriousHardware robot = new SeriousHardware();
 
-    DcMotor  rightSideFront, rightSideBack, leftSideFront, leftSideBack, strafe, glyphlift, glyphright, glyphleft;
-    Servo  glyphdump, jewel, glyright, glyleft;
+    DcMotor rightSideFront, rightSideBack, leftSideFront, leftSideBack, strafe, glyphlift, glyphright, glyphleft;
+    Servo glyphdump, jewel, glyright, glyleft;
     DeviceInterfaceModule cdim;
     AdafruitI2cColorSensor sensorRGB;
 
-    boolean Blue = true;
-    boolean Red = false;
+    boolean Red = true;
+    boolean Blue = false;
 
     @Override
     public void runOpMode() throws InterruptedException {
 
         robot.init(hardwareMap);
+
 
         strafe = hardwareMap.dcMotor.get("STR");
         rightSideFront = hardwareMap.dcMotor.get("MRF");
@@ -54,7 +52,6 @@ public class ColorSensor_Blue extends LinearOpMode {
         glyright.setPosition(0.45);
         glyleft.setPosition(0.55);
 
-
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Status", "Ready to run");    //
         telemetry.update();
@@ -68,6 +65,8 @@ public class ColorSensor_Blue extends LinearOpMode {
 
         sleep(2000);
 
+        sensorRGB.initialize();
+
         for(int i = 0; i < 20; ++i) {
             telemetry.addData("Clear", (sensorRGB.alpha()) / 256);
             telemetry.addData("Red  ", (sensorRGB.red()) / 256);
@@ -78,15 +77,15 @@ public class ColorSensor_Blue extends LinearOpMode {
         }
 
         if (sensorRGB.red() > sensorRGB.blue()) {
-            rightSideBack.setPower(0.4);
-            leftSideBack.setPower(0.4);
-            rightSideFront.setPower(0.4);
-            leftSideBack.setPower(0.4);
-        } else {
             rightSideBack.setPower(-0.4);
             leftSideBack.setPower(-0.4);
             rightSideFront.setPower(-0.4);
             leftSideBack.setPower(-0.4);
+        } else {
+            rightSideBack.setPower(0.4);
+            leftSideBack.setPower(0.4);
+            rightSideFront.setPower(0.4);
+            leftSideBack.setPower(0.4);
         }
 
         sleep(500);
@@ -97,8 +96,5 @@ public class ColorSensor_Blue extends LinearOpMode {
         leftSideBack.setPower(0);
 
         sleep(15000);
-
-
-  }
+    }
 }
-
