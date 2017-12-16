@@ -69,15 +69,15 @@ public class ColorSensor_Blue extends LinearOpMode {
         sleep(2000);
 
         for(int i = 0; i < 20; ++i) {
-            telemetry.addData("Clear", sensorRGB.alpha());
-            telemetry.addData("Red  ", sensorRGB.red());
-            telemetry.addData("Green", sensorRGB.green());
-            telemetry.addData("Blue ", sensorRGB.blue());
+            telemetry.addData("Clear", (sensorRGB.alpha()) / 256);
+            telemetry.addData("Red  ", (sensorRGB.red()) / 256);
+            telemetry.addData("Green", (sensorRGB.green()) / 256);
+            telemetry.addData("Blue ", (sensorRGB.blue()) / 256);
 
             telemetry.update();
         }
 
-        if (sensorRGB.red() > 100) {
+        if (sensorRGB.red() > sensorRGB.blue()) {
             rightSideBack.setPower(0.4);
             leftSideBack.setPower(0.4);
             rightSideFront.setPower(0.4);

@@ -79,6 +79,8 @@ public class TeleOp_Comp extends OpMode {
 
         jewelPosition = 1;
         glyphdumpPosition = 1;
+        glyrightPosition = 0;
+        glyleftPosition = 1;
     }
 
 	public void loop()
