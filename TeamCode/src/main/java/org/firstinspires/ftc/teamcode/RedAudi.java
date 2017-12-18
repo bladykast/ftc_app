@@ -8,8 +8,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
  * Created by 7t.qr on 12/13/2017.
  */
 
-@Autonomous(name = "Red Stationary", group = "Autonomous")
-public class ColorSensor_RedStat extends LinearOpMode {
+@Autonomous(name = "Red Audience Side", group = "Autonomous")
+public class RedAudi extends LinearOpMode {
 
     SeriousHardware robot = new SeriousHardware();
 

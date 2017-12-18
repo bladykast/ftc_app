@@ -8,8 +8,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
  * Created by 7t.qr on 12/13/2017.
  */
 
-@Autonomous(name="Blue 1", group ="Concept")
-public class Blue_1 extends LinearOpMode {
+@Autonomous(name="Blue Audience Side", group ="Concept")
+public class BlueAudi extends LinearOpMode {
 
     SeriousHardware robot  = new SeriousHardware();
 
@@ -105,3 +105,5 @@ public class Blue_1 extends LinearOpMode {
         robot.strafe.setPower(power);
     }
 }
+
+

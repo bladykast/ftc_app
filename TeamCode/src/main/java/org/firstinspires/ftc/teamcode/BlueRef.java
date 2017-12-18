@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 
@@ -8,13 +9,14 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
  * Created by 7t.qr on 12/13/2017.
  */
 
-@Autonomous(name = "Red Park", group = "Autonomous")
-public class ColorSensor_RedPark extends LinearOpMode {
+@Autonomous(name="Blue Ref Side", group ="Concept")
+@Disabled
+public class BlueRef extends LinearOpMode {
 
-    SeriousHardware robot = new SeriousHardware();
+    SeriousHardware robot  = new SeriousHardware();
 
-    boolean Red = true;
-    boolean Blue = false;
+    boolean Blue = true;
+    boolean Red = false;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -25,6 +27,7 @@ public class ColorSensor_RedPark extends LinearOpMode {
         robot.glyphdump.setPosition(1);
         robot.glyright.setPosition(0.45);
         robot.glyleft.setPosition(0.55);
+
 
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Status", "Ready to run");    //
@@ -39,7 +42,7 @@ public class ColorSensor_RedPark extends LinearOpMode {
 
         sleep(2000);
 
-        for(int i = 0; i < 20; ++i) {
+        for (int i = 0; i < 20; ++i) {
             telemetry.addData("Clear", (robot.sensorRGB.alpha()) / 256);
             telemetry.addData("Red  ", (robot.sensorRGB.red()) / 256);
             telemetry.addData("Green", (robot.sensorRGB.green()) / 256);
@@ -49,12 +52,15 @@ public class ColorSensor_RedPark extends LinearOpMode {
         }
 
         if (robot.sensorRGB.red() > robot.sensorRGB.blue()) {
-            GoBackward(0.4);
-        } else {
             GoForward(0.4);
+
+        } else {
+            GoBackward(0.4);
         }
 
         sleep(500);
+
+        robot.jewel.setPosition(1);
 
         Stop();
 
@@ -84,3 +90,5 @@ public class ColorSensor_RedPark extends LinearOpMode {
         robot.strafe.setPower(power);
     }
 }
+
+

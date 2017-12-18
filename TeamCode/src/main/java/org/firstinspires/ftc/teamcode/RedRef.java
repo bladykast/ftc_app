@@ -8,13 +8,13 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
  * Created by 7t.qr on 12/13/2017.
  */
 
-@Autonomous(name="Blue Park", group ="Concept")
-public class ColorSensor_BluePark extends LinearOpMode {
+@Autonomous(name = "Red Ref Side", group = "Autonomous")
+public class RedRef extends LinearOpMode {
 
-    SeriousHardware robot  = new SeriousHardware();
+    SeriousHardware robot = new SeriousHardware();
 
-    boolean Blue = true;
-    boolean Red = false;
+    boolean Red = true;
+    boolean Blue = false;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -25,7 +25,6 @@ public class ColorSensor_BluePark extends LinearOpMode {
         robot.glyphdump.setPosition(1);
         robot.glyright.setPosition(0.45);
         robot.glyleft.setPosition(0.55);
-
 
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Status", "Ready to run");    //
@@ -50,36 +49,16 @@ public class ColorSensor_BluePark extends LinearOpMode {
         }
 
         if (robot.sensorRGB.red() > robot.sensorRGB.blue()) {
-            GoForward(0.4);
-
-            sleep(500);
-
-            robot.jewel.setPosition(1);
-
-            GoForward(0.4);
-
-            sleep(1000);
-        } else {
             GoBackward(0.4);
-
-            sleep(200);
-
-            robot.jewel.setPosition(1);
-
-            sleep(500);
-
+        } else {
             GoForward(0.4);
-
-            sleep(1500);
         }
 
-        robot.jewel.setPosition(1);
+        sleep(500);
 
         Stop();
 
         sleep(15000);
-
-
     }
 
     public void GoForward(double power) {
@@ -105,5 +84,3 @@ public class ColorSensor_BluePark extends LinearOpMode {
         robot.strafe.setPower(power);
     }
 }
-
-
