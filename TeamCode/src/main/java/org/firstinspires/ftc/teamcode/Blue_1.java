@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 
@@ -9,9 +8,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
  * Created by 7t.qr on 12/13/2017.
  */
 
-@Autonomous(name="Blue Stationary", group ="Concept")
-@Disabled
-public class ColorSensor_BlueStat extends LinearOpMode {
+@Autonomous(name="Blue 1", group ="Concept")
+public class Blue_1 extends LinearOpMode {
 
     SeriousHardware robot  = new SeriousHardware();
 
@@ -42,7 +40,7 @@ public class ColorSensor_BlueStat extends LinearOpMode {
 
         sleep(2000);
 
-        for (int i = 0; i < 20; ++i) {
+        for(int i = 0; i < 20; ++i) {
             telemetry.addData("Clear", (robot.sensorRGB.alpha()) / 256);
             telemetry.addData("Red  ", (robot.sensorRGB.red()) / 256);
             telemetry.addData("Green", (robot.sensorRGB.green()) / 256);
@@ -54,17 +52,34 @@ public class ColorSensor_BlueStat extends LinearOpMode {
         if (robot.sensorRGB.red() > robot.sensorRGB.blue()) {
             GoForward(0.4);
 
+            sleep(500);
+
+            robot.jewel.setPosition(1);
+
+            GoForward(0.4);
+
+            sleep(1000);
         } else {
             GoBackward(0.4);
-        }
 
-        sleep(500);
+            sleep(200);
+
+            robot.jewel.setPosition(1);
+
+            sleep(500);
+
+            GoForward(0.4);
+
+            sleep(1500);
+        }
 
         robot.jewel.setPosition(1);
 
         Stop();
 
         sleep(15000);
+
+
     }
 
     public void GoForward(double power) {
@@ -90,5 +105,3 @@ public class ColorSensor_BlueStat extends LinearOpMode {
         robot.strafe.setPower(power);
     }
 }
-
-

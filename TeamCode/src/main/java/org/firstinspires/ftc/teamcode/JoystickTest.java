@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 
 @TeleOp(name = "Joystick Test", group = "TeleOp")
-//@Disabled
+@Disabled
 
 public class JoystickTest extends OpMode {
 
@@ -26,10 +26,10 @@ public class JoystickTest extends OpMode {
 
 	public void loop()
 	{
-		float y1 = gamepad1.left_stick_y;
-		float y2 = gamepad1.right_stick_y;
-		float y3 = gamepad2.left_stick_y;
-		float y4 = gamepad2.right_stick_y;
+		float y1 = -gamepad1.left_stick_y;
+		float y2 = -gamepad1.right_stick_y;
+		float y3 = -gamepad2.left_stick_y;
+		float y4 = -gamepad2.right_stick_y;
 
 		y1 = Range.clip(y1, -1, 1);
 		y2 = Range.clip(y2, -1, 1);
