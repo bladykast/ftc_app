@@ -56,6 +56,8 @@ public class RedRef extends LinearOpMode {
 
         sleep(500);
 
+        robot.jewel.setPosition(1);
+
         Stop();
 
         sleep(15000);
@@ -65,7 +67,7 @@ public class RedRef extends LinearOpMode {
         robot.rightSideBack.setPower(power);
         robot.leftSideBack.setPower(power);
         robot.rightSideFront.setPower(power);
-        robot.leftSideBack.setPower(power);
+        robot.leftSideFront.setPower(power);
     }
 
     public void GoBackward(double power) {
@@ -76,7 +78,7 @@ public class RedRef extends LinearOpMode {
         robot.rightSideBack.setPower(0);
         robot.leftSideBack.setPower(0);
         robot.rightSideFront.setPower(0);
-        robot.leftSideBack.setPower(0);
+        robot.leftSideFront.setPower(0);
         robot.strafe.setPower(0);
     }
 

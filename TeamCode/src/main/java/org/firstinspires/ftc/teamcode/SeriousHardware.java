@@ -58,12 +58,6 @@ public class SeriousHardware
     //Servo claw
     //CrServo relicIO, relicUD
 
-    public static double jewelPosition, glyphdumpPosition, glyrightPosition, glyleftPosition;
-    public static double MAX_SPEED = 1;
-    public static double MIN_SPEED = 0.4;
-    public static double MOTOR_SPEED = 1;
-    public static boolean slow = true;
-
     public DcMotor rightSideFront, rightSideBack, leftSideFront, leftSideBack, strafe, glyphlift, glyphright, glyphleft = null;
     public Servo glyphdump, jewel, glyright, glyleft = null;
     public DeviceInterfaceModule cdim = null;
@@ -131,11 +125,7 @@ public class SeriousHardware
         glyright.setPosition(0);
         glyleft.setPosition(1);
 
-        jewelPosition = 1;
-        glyphdumpPosition = 1;
-        //clawPosition = 0.1;
-        glyleftPosition = 1;
-        glyrightPosition = 0;
+
     }
 }
 

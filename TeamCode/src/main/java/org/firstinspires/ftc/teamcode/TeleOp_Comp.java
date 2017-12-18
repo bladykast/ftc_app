@@ -4,26 +4,25 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
 
-import static org.firstinspires.ftc.teamcode.SeriousHardware.MAX_SPEED;
-import static org.firstinspires.ftc.teamcode.SeriousHardware.MIN_SPEED;
-import static org.firstinspires.ftc.teamcode.SeriousHardware.MOTOR_SPEED;
 import static org.firstinspires.ftc.teamcode.SeriousHardware.glyleftDown;
-import static org.firstinspires.ftc.teamcode.SeriousHardware.glyleftPosition;
 import static org.firstinspires.ftc.teamcode.SeriousHardware.glyleftUp;
 import static org.firstinspires.ftc.teamcode.SeriousHardware.glyphdumpDown;
-import static org.firstinspires.ftc.teamcode.SeriousHardware.glyphdumpPosition;
 import static org.firstinspires.ftc.teamcode.SeriousHardware.glyphdumpUp;
 import static org.firstinspires.ftc.teamcode.SeriousHardware.glyrightDown;
-import static org.firstinspires.ftc.teamcode.SeriousHardware.glyrightPosition;
 import static org.firstinspires.ftc.teamcode.SeriousHardware.glyrightUp;
-import static org.firstinspires.ftc.teamcode.SeriousHardware.jewelPosition;
-import static org.firstinspires.ftc.teamcode.SeriousHardware.slow;
+
 
 @TeleOp(name = "3736: TeleOp", group = "TeleOp")
 
 public class TeleOp_Comp extends OpMode {
 
 	SeriousHardware robot  = new SeriousHardware();
+
+    public static double jewelPosition, glyphdumpPosition, glyrightPosition, glyleftPosition;
+    public static double MAX_SPEED = 1;
+    public static double MIN_SPEED = 0.4;
+    public static double MOTOR_SPEED = 1;
+    public static boolean slow = true;
 
 	@Override
 	public void init() {

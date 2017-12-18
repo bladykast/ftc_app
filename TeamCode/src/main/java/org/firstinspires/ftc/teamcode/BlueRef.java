@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
  */
 
 @Autonomous(name="Blue Ref Side", group ="Concept")
-@Disabled
+
 public class BlueRef extends LinearOpMode {
 
     SeriousHardware robot  = new SeriousHardware();
@@ -71,7 +71,7 @@ public class BlueRef extends LinearOpMode {
         robot.rightSideBack.setPower(power);
         robot.leftSideBack.setPower(power);
         robot.rightSideFront.setPower(power);
-        robot.leftSideBack.setPower(power);
+        robot.leftSideFront.setPower(power);
     }
 
     public void GoBackward(double power) {
@@ -82,7 +82,7 @@ public class BlueRef extends LinearOpMode {
         robot.rightSideBack.setPower(0);
         robot.leftSideBack.setPower(0);
         robot.rightSideFront.setPower(0);
-        robot.leftSideBack.setPower(0);
+        robot.leftSideFront.setPower(0);
         robot.strafe.setPower(0);
     }
 

@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
  */
 
 @Autonomous(name="Blue Audience Side", group ="Concept")
+
 public class BlueAudi extends LinearOpMode {
 
     SeriousHardware robot  = new SeriousHardware();
@@ -40,7 +41,7 @@ public class BlueAudi extends LinearOpMode {
 
         sleep(2000);
 
-        for(int i = 0; i < 20; ++i) {
+        for (int i = 0; i < 20; ++i) {
             telemetry.addData("Clear", (robot.sensorRGB.alpha()) / 256);
             telemetry.addData("Red  ", (robot.sensorRGB.red()) / 256);
             telemetry.addData("Green", (robot.sensorRGB.green()) / 256);
@@ -52,41 +53,24 @@ public class BlueAudi extends LinearOpMode {
         if (robot.sensorRGB.red() > robot.sensorRGB.blue()) {
             GoBackward(0.4);
 
-            sleep(500);
-
-            robot.jewel.setPosition(1);
-
-            GoBackward(0.4);
-
-            sleep(1000);
         } else {
             GoForward(0.4);
-
-            sleep(200);
-
-            robot.jewel.setPosition(1);
-
-            sleep(500);
-
-            GoBackward(0.4);
-
-            sleep(1500);
         }
+
+        sleep(500);
 
         robot.jewel.setPosition(1);
 
         Stop();
 
         sleep(15000);
-
-
     }
 
     public void GoForward(double power) {
         robot.rightSideBack.setPower(power);
         robot.leftSideBack.setPower(power);
         robot.rightSideFront.setPower(power);
-        robot.leftSideBack.setPower(power);
+        robot.leftSideFront.setPower(power);
     }
 
     public void GoBackward(double power) {
@@ -97,7 +81,7 @@ public class BlueAudi extends LinearOpMode {
         robot.rightSideBack.setPower(0);
         robot.leftSideBack.setPower(0);
         robot.rightSideFront.setPower(0);
-        robot.leftSideBack.setPower(0);
+        robot.leftSideFront.setPower(0);
         robot.strafe.setPower(0);
     }
 
