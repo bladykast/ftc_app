@@ -32,6 +32,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.hardware.adafruit.AdafruitI2cColorSensor;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DeviceInterfaceModule;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -52,16 +53,17 @@ public class SeriousHardware
     public final static double glyrightUp = 0.1;
     public final static double glyrightDown = 0;
     public final static double glyleftUp = 0.9;
+    public final static double glyleftDown = 1;
 
     //Servo claw
     //CrServo relicIO, relicUD
-    public final static double glyleftDown = 1;
+
     public static double jewelPosition, glyphdumpPosition, glyrightPosition, glyleftPosition;
     public static double MAX_SPEED = 1;
     public static double MIN_SPEED = 0.4;
     public static double MOTOR_SPEED = 1;
     public static boolean slow = true;
-    /* Public OpMode members. */
+
     public DcMotor rightSideFront, rightSideBack, leftSideFront, leftSideBack, strafe, glyphlift, glyphright, glyphleft = null;
     public Servo glyphdump, jewel, glyright, glyleft = null;
     public DeviceInterfaceModule cdim = null;
@@ -69,7 +71,7 @@ public class SeriousHardware
     public OpticalDistanceSensor odsSensor = null;
     public BNO055IMU imu = null;
     public DigitalChannel digitalTouch = null;
-    /* local OpMode members. */
+
     HardwareMap hwMap           =  null;
     private ElapsedTime period  = new ElapsedTime();
 
@@ -108,10 +110,10 @@ public class SeriousHardware
         //relicIO = hardwareMap.crservo.get("RIO");
         //relicUD = hardwareMap.crservo.get("RUD");
 
-        rightSideFront.setDirection(DcMotor.Direction.FORWARD);
-        rightSideBack.setDirection(DcMotor.Direction.REVERSE);
-        leftSideFront.setDirection(DcMotor.Direction.REVERSE);
-        leftSideBack.setDirection(DcMotor.Direction.FORWARD);
+        rightSideFront.setDirection(DcMotor.Direction.REVERSE);
+        rightSideBack.setDirection(DcMotor.Direction.FORWARD);
+        leftSideFront.setDirection(DcMotor.Direction.FORWARD);
+        leftSideBack.setDirection(DcMotor.Direction.REVERSE);
         strafe.setDirection(DcMotor.Direction.REVERSE);
         glyphlift.setDirection(DcMotor.Direction.FORWARD);
         glyphleft.setDirection(DcMotor.Direction.FORWARD);

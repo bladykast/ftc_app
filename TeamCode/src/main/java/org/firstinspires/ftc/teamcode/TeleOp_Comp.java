@@ -44,10 +44,10 @@ public class TeleOp_Comp extends OpMode {
 	public void loop()
 	{
 
-		float y1 = gamepad1.left_stick_y;
-		float y2 = gamepad1.right_stick_y;
-		float y3 = gamepad2.left_stick_y;
-		float y4 = gamepad2.right_stick_y;
+		float y1 = -gamepad1.left_stick_y;
+		float y2 = -gamepad1.right_stick_y;
+		float y3 = -gamepad2.left_stick_y;
+		float y4 = -gamepad2.right_stick_y;
 		boolean b1 = gamepad2.left_bumper;
 		boolean b2 = gamepad2.right_bumper;
 		boolean dleft = gamepad1.dpad_left;
@@ -57,11 +57,6 @@ public class TeleOp_Comp extends OpMode {
 		y2 = Range.clip(y2, -1, 1);
 		y3 = Range.clip(y3, -1, 1);
 		y4 = Range.clip(y4, -1, 1);
-
-		y1 = (float)scaleInput(y1);
-		y2 = (float)scaleInput(y2);
-		y3 = (float)scaleInput(y3);
-		y4 = (float)scaleInput(y4);
 
 		//High-Low Speed Code
 
@@ -202,27 +197,4 @@ public class TeleOp_Comp extends OpMode {
 
 	}
 
-	double scaleInput(double dVal)  {
-		double[] scaleArray = { 0.0, 0.05, 0.09, 0.10, 0.12, 0.15, 0.18, 0.24,
-				0.30, 0.36, 0.43, 0.50, 0.60, 0.72, 0.85, 1.00, 1.00 };
-
-		int index = (int) (dVal * 16.0);
-
-		if (index < 0) {
-			index = -index;
-		}
-
-		if (index > 16) {
-			index = 16;
-		}
-
-		double dScale = 0.0;
-		if (dVal < 0) {
-			dScale = -scaleArray[index];
-		} else {
-			dScale = scaleArray[index];
-		}
-
-		return dScale;
-	}
 }
