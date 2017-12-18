@@ -1,81 +1,39 @@
-
-
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.hardware.CRServo;
-import com.qualcomm.robotcore.hardware.ColorSensor;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.DeviceInterfaceModule;
-import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
 
-import org.firstinspires.ftc.robotcontroller.external.samples.ConceptRampMotorSpeed;
+import static org.firstinspires.ftc.teamcode.SeriousHardware.MAX_SPEED;
+import static org.firstinspires.ftc.teamcode.SeriousHardware.MIN_SPEED;
+import static org.firstinspires.ftc.teamcode.SeriousHardware.MOTOR_SPEED;
+import static org.firstinspires.ftc.teamcode.SeriousHardware.glyleftDown;
+import static org.firstinspires.ftc.teamcode.SeriousHardware.glyleftPosition;
+import static org.firstinspires.ftc.teamcode.SeriousHardware.glyleftUp;
+import static org.firstinspires.ftc.teamcode.SeriousHardware.glyphdumpDown;
+import static org.firstinspires.ftc.teamcode.SeriousHardware.glyphdumpPosition;
+import static org.firstinspires.ftc.teamcode.SeriousHardware.glyphdumpUp;
+import static org.firstinspires.ftc.teamcode.SeriousHardware.glyrightDown;
+import static org.firstinspires.ftc.teamcode.SeriousHardware.glyrightPosition;
+import static org.firstinspires.ftc.teamcode.SeriousHardware.glyrightUp;
+import static org.firstinspires.ftc.teamcode.SeriousHardware.jewelPosition;
+import static org.firstinspires.ftc.teamcode.SeriousHardware.slow;
 
-@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "3736: TeleOp", group = "TeleOp")
+@TeleOp(name = "3736: TeleOp", group = "TeleOp")
 
 public class TeleOp_Comp extends OpMode {
 
 	SeriousHardware robot  = new SeriousHardware();
 
-	//final static double JEWEL_MIN_RANGE  = 0;
-	//final static double JEWEL_MAX_RANGE  = 1;
-	final static double GLYPHDUMP_MIN_RANGE  = 0;
-	final static double GLYPHDUMP_MAX_RANGE  = 1;
-
-	double MAX_SPEED = 1;
-	double MIN_SPEED = 0.4;
-	double MOTOR_SPEED = 1;
-
-	boolean slow = true;
-
-    public double jewelPosition, glyphdumpPosition, glyrightPosition, glyleftPosition, clawPosition;
-
-	//double jewelUp = 1;
-	//double jewelDown = 0.5;
-	double glyphdumpUp = 0.1;
-    double glyphdumpDown = 1;
-    double glyrightUp = 0.1;
-    double glyrightDown = 0;
-    double glyleftUp = 0.9;
-    double glyleftDown = 1;
-    double clawIn;
-    double clawOut;
-
-    DcMotor  rightSideFront, rightSideBack, leftSideFront, leftSideBack, strafe, glyphlift, glyphright, glyphleft;
-    Servo  glyphdump, jewel, glyright, glyleft;
-    DeviceInterfaceModule cdim;
-    ColorSensor sensorRGB;
-
-	public TeleOp_Comp() {
-
-	}
-
 	@Override
 	public void init() {
+
         robot.init(hardwareMap);
 
-		strafe = hardwareMap.dcMotor.get("STR");
-		rightSideFront = hardwareMap.dcMotor.get("MRF");
-		rightSideBack = hardwareMap.dcMotor.get("MRB");
-		leftSideFront = hardwareMap.dcMotor.get("MLF");
-		leftSideBack = hardwareMap.dcMotor.get("MLB");
-		glyphlift = hardwareMap.dcMotor.get("LFT");
-		glyphleft = hardwareMap.dcMotor.get("GLYL");
-		glyphright = hardwareMap.dcMotor.get("GLYR");
-
-		jewel = hardwareMap.servo.get("JWL");
-		glyphdump = hardwareMap.servo.get("GLY");
-		glyleft = hardwareMap.servo.get("GLYSL");
-		glyright = hardwareMap.servo.get("GLYSR");
-
-		sensorRGB = hardwareMap.colorSensor.get("sensor_color");
-
-        jewel.setPosition(1);
-        glyphdump.setPosition(1);
-        glyright.setPosition(0.45);
-        glyleft.setPosition(0.55);
+        robot.jewel.setPosition(1);
+        robot.glyphdump.setPosition(1);
+        robot.glyright.setPosition(0.45);
+        robot.glyleft.setPosition(0.55);
 
         jewelPosition = 1;
         glyphdumpPosition = 1;
@@ -105,51 +63,41 @@ public class TeleOp_Comp extends OpMode {
 		y3 = (float)scaleInput(y3);
 		y4 = (float)scaleInput(y4);
 
-
-
 		//High-Low Speed Code
 
 		if (gamepad1.a) {
 			slow = true;
 		}
 
-		if (gamepad1.x) {
-			slow = false;
-		}
+        if (gamepad1.x) slow = false;
 
-		if (slow) {
-			MOTOR_SPEED = MIN_SPEED;
-		}
-		if (!slow) {
-			MOTOR_SPEED = MAX_SPEED;
-		}
-
+        if (slow) MOTOR_SPEED = MIN_SPEED;
+        if (!slow) MOTOR_SPEED = MAX_SPEED;
 
 		//Drivetrain Code
 
-		leftSideFront.setPower(y1 * MOTOR_SPEED);
-		leftSideBack.setPower(y1 * MOTOR_SPEED);
-		rightSideFront.setPower(y2 * MOTOR_SPEED);
-		rightSideBack.setPower(y2 * MOTOR_SPEED);
-		glyphlift.setPower(y3);
+        robot.leftSideFront.setPower(y1 * MOTOR_SPEED);
+        robot.leftSideBack.setPower(y1 * MOTOR_SPEED);
+        robot.rightSideFront.setPower(y2 * MOTOR_SPEED);
+        robot.rightSideBack.setPower(y2 * MOTOR_SPEED);
+        robot.glyphlift.setPower(y3);
 
 		if (gamepad1.dpad_left)
 		{
-			strafe.setPower(-1);
-		}
+            robot.strafe.setPower(-1);
+        }
 		else if (gamepad1.dpad_right)
 		{
-			strafe.setPower(1);
-		}
-		else strafe.setPower(0);
+            robot.strafe.setPower(1);
+        } else robot.strafe.setPower(0);
 
 
         //Jewel Code
 
 		//if (gamepad2.b)
-	    //{
-		//    jewelPosition = jewelUp;
-	    //}
+        //{
+        //    jewelPosition = jewelUp;
+        //}
 
 		//if (gamepad2.y)
 		//{
@@ -158,8 +106,8 @@ public class TeleOp_Comp extends OpMode {
 
 
         //Glyph Code
-			//Gamepad 2
-		if (gamepad2.x)
+        //Gamepad 2
+        if (gamepad2.x)
 		{
 			glyphdumpPosition = glyphdumpUp;
 		}
@@ -168,30 +116,23 @@ public class TeleOp_Comp extends OpMode {
 			glyphdumpPosition = glyphdumpDown;
 		}
 
-			//Gamepad 1
-        if (gamepad1.left_bumper)
-        {
-            glyphleft.setPower(-1);
-            glyphright.setPower(-1);
-        }
-        else if (gamepad1.right_bumper)
-        {
-            glyphleft.setPower(1);
-            glyphright.setPower(1);
-        }
-        else
-        {
-            glyphleft.setPower(0);
-            glyphright.setPower(0);
+        //Gamepad 1
+        if (gamepad1.left_bumper) {
+            robot.glyphleft.setPower(-1);
+            robot.glyphright.setPower(-1);
+        } else if (gamepad1.right_bumper) {
+            robot.glyphleft.setPower(1);
+            robot.glyphright.setPower(1);
+        } else {
+            robot.glyphleft.setPower(0);
+            robot.glyphright.setPower(0);
         }
 
-        if (gamepad1.y)
-        {
+        if (gamepad1.y) {
             glyrightPosition = glyrightUp;
             glyleftPosition = glyleftUp;
         }
-        if (gamepad1.b)
-        {
+        if (gamepad1.b) {
             glyrightPosition = glyrightDown;
             glyleftPosition = glyleftDown;
         }
@@ -223,7 +164,6 @@ public class TeleOp_Comp extends OpMode {
         //}
 
 
-
         //Super Mario linear code (hold more to go further...)
 
         //if (gamepad2.x)
@@ -242,16 +182,16 @@ public class TeleOp_Comp extends OpMode {
 
 		//jewel.setPosition(jewelPosition);
         //claw.setPosition(clawPosition);
-        glyleft.setPosition(glyleftPosition);
-        glyright.setPosition(glyrightPosition);
-        glyphdump.setPosition(glyphdumpPosition);
+        robot.glyleft.setPosition(glyleftPosition);
+        robot.glyright.setPosition(glyrightPosition);
+        robot.glyphdump.setPosition(glyphdumpPosition);
 
 		telemetry.addData("Text", "*** Robot Data***");
 		//telemetry.addData("jewel", "jewel:  " + String.format("%.2f", jewelPosition));
         //telemetry.addData("claw", "claw:  " + String.format("%.2f", clawPosition));
-		telemetry.addData("glyph", "glyph:  " + String.format("%.2f", glyphdumpPosition));
+        telemetry.addData("glyph", "glyph:  " + String.format("%.2f", glyphdumpPosition));
         telemetry.addData("glyleft", "glyph:  " + String.format("%.2f", glyleftPosition));
-		telemetry.addData("glyright", "glyph:  " + String.format("%.2f", glyrightPosition));
+        telemetry.addData("glyright", "glyph:  " + String.format("%.2f", glyrightPosition));
 		telemetry.addData("Motor Speed", "Speed:  " + String.format("%.2f", MOTOR_SPEED));
 	}
 

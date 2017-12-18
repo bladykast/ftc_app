@@ -1,11 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.hardware.adafruit.AdafruitI2cColorSensor;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DeviceInterfaceModule;
-import com.qualcomm.robotcore.hardware.Servo;
 
 
 /**
@@ -17,11 +13,6 @@ public class ColorSensor_BlueStat extends LinearOpMode {
 
     SeriousHardware robot  = new SeriousHardware();
 
-    DcMotor  rightSideFront, rightSideBack, leftSideFront, leftSideBack, strafe, glyphlift, glyphright, glyphleft;
-    Servo  glyphdump, jewel, glyright, glyleft;
-    DeviceInterfaceModule cdim;
-    AdafruitI2cColorSensor sensorRGB;
-
     boolean Blue = true;
     boolean Red = false;
 
@@ -30,35 +21,10 @@ public class ColorSensor_BlueStat extends LinearOpMode {
 
         robot.init(hardwareMap);
 
-        strafe = hardwareMap.dcMotor.get("STR");
-        rightSideFront = hardwareMap.dcMotor.get("MRF");
-        rightSideBack = hardwareMap.dcMotor.get("MRB");
-        leftSideFront = hardwareMap.dcMotor.get("MLF");
-        leftSideBack = hardwareMap.dcMotor.get("MLB");
-        glyphlift = hardwareMap.dcMotor.get("LFT");
-        glyphleft = hardwareMap.dcMotor.get("GLYL");
-        glyphright = hardwareMap.dcMotor.get("GLYR");
-
-        jewel = hardwareMap.servo.get("JWL");
-        glyphdump = hardwareMap.servo.get("GLY");
-        glyleft = hardwareMap.servo.get("GLYSL");
-        glyright = hardwareMap.servo.get("GLYSR");
-
-        sensorRGB = (AdafruitI2cColorSensor)hardwareMap.get("sensor_color");
-
-        rightSideFront.setDirection(DcMotor.Direction.FORWARD);
-        rightSideBack.setDirection(DcMotor.Direction.REVERSE);
-        leftSideFront.setDirection(DcMotor.Direction.REVERSE);
-        leftSideBack.setDirection(DcMotor.Direction.FORWARD);
-        strafe.setDirection(DcMotor.Direction.REVERSE);
-        glyphlift.setDirection(DcMotor.Direction.FORWARD);
-        glyphleft.setDirection(DcMotor.Direction.FORWARD);
-        glyphright.setDirection(DcMotor.Direction.FORWARD);
-
-        jewel.setPosition(1);
-        glyphdump.setPosition(1);
-        glyright.setPosition(0.45);
-        glyleft.setPosition(0.55);
+        robot.jewel.setPosition(1);
+        robot.glyphdump.setPosition(1);
+        robot.glyright.setPosition(0.45);
+        robot.glyleft.setPosition(0.55);
 
 
         // Send telemetry message to signify robot waiting;
@@ -70,48 +36,57 @@ public class ColorSensor_BlueStat extends LinearOpMode {
 
         sleep(2000);
 
-        jewel.setPosition(0.35);
+        robot.jewel.setPosition(0.35);
 
         sleep(2000);
 
-        for(int i = 0; i < 20; ++i) {
-            telemetry.addData("Clear", (sensorRGB.alpha()) / 256);
-            telemetry.addData("Red  ", (sensorRGB.red()) / 256);
-            telemetry.addData("Green", (sensorRGB.green()) / 256);
-            telemetry.addData("Blue ", (sensorRGB.blue()) / 256);
+        for (int i = 0; i < 20; ++i) {
+            telemetry.addData("Clear", (robot.sensorRGB.alpha()) / 256);
+            telemetry.addData("Red  ", (robot.sensorRGB.red()) / 256);
+            telemetry.addData("Green", (robot.sensorRGB.green()) / 256);
+            telemetry.addData("Blue ", (robot.sensorRGB.blue()) / 256);
 
             telemetry.update();
         }
 
-        if (sensorRGB.red() > sensorRGB.blue()) {
-            rightSideBack.setPower(0.4);
-            leftSideBack.setPower(0.4);
-            rightSideFront.setPower(0.4);
-            leftSideBack.setPower(0.4);
-
+        if (robot.sensorRGB.red() > robot.sensorRGB.blue()) {
+            GoForward(0.4);
 
         } else {
-            rightSideBack.setPower(-0.4);
-            leftSideBack.setPower(-0.4);
-            rightSideFront.setPower(-0.4);
-            leftSideBack.setPower(-0.4);
-
-            sleep(1500);
+            GoBackward(0.4);
         }
 
         sleep(500);
 
-        jewel.setPosition(1);
+        robot.jewel.setPosition(1);
 
-        rightSideBack.setPower(0);
-        leftSideBack.setPower(0);
-        rightSideFront.setPower(0);
-        leftSideBack.setPower(0);
+        Stop();
 
         sleep(15000);
+    }
 
+    public void GoForward(double power) {
+        robot.rightSideBack.setPower(power);
+        robot.leftSideBack.setPower(power);
+        robot.rightSideFront.setPower(power);
+        robot.leftSideBack.setPower(power);
+    }
 
-  }
+    public void GoBackward(double power) {
+        GoBackward(-power);
+    }
+
+    public void Stop() {
+        robot.rightSideBack.setPower(0);
+        robot.leftSideBack.setPower(0);
+        robot.rightSideFront.setPower(0);
+        robot.leftSideBack.setPower(0);
+        robot.strafe.setPower(0);
+    }
+
+    public void Strafe(double power) {
+        robot.strafe.setPower(power);
+    }
 }
 
 

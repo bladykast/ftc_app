@@ -29,89 +29,79 @@
 
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.hardware.ColorSensor;
+import com.qualcomm.hardware.adafruit.AdafruitI2cColorSensor;
+import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DeviceInterfaceModule;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
  * This is NOT an opmode.
- *
- * This class can be used to define all the specific hardware for a single robot.
- * In this case that robot is a Pushbot.
- * See PushbotTeleopTank_Iterative and others classes starting with "Pushbot" for usage examples.
- *
- * This hardware class assumes the following device names have been configured on the robot:
- * Note:  All names are lower case and some have single spaces between words.
- *
- * Motor channel:  Left  drive motor:        "left_drive"
- * Motor channel:  Right drive motor:        "right_drive"
- * Motor channel:  Manipulator drive motor:  "left_arm"
- * Servo channel:  Servo to open left claw:  "left_hand"
- * Servo channel:  Servo to open right claw: "right_hand"
  */
+
 public class SeriousHardware
 {
-    /* Public OpMode members. */
-    DcMotor  rightSideFront, rightSideBack, leftSideFront, leftSideBack, strafe, glyphlift, glyphright, glyphleft = null;
-    Servo  glyphdump, jewel, glyright, glyleft = null;
-
-    DeviceInterfaceModule cdim = null;
-    ColorSensor sensorRGB = null;
+    public final static double jewelUp = 1;
+    public final static double jewelDown = 0.5;
+    public final static double glyphdumpUp = 0.1;
+    public final static double glyphdumpDown = 1;
+    public final static double glyrightUp = 0.1;
+    public final static double glyrightDown = 0;
+    public final static double glyleftUp = 0.9;
 
     //Servo claw
     //CrServo relicIO, relicUD
-
-    public double jewelPosition, glyphdumpPosition, glyrightPosition, glyleftPosition;
-
-    public double MAX_SPEED = 1;
-    public double MIN_SPEED = 0.4;
-    public double MOTOR_SPEED = 1;
-
-    public boolean slow = true;
-
-    public double jewelUp = 1;
-    public double jewelDown = 0.5;
-    public double glyphdumpUp = 0.1;
-    public double glyphdumpDown = 1;
-    public double glyrightUp = 0.1;
-    public double glyrightDown = 0;
-    public double glyleftUp = 0.9;
-    public double glyleftDown = 1;
-
-
+    public final static double glyleftDown = 1;
+    public static double jewelPosition, glyphdumpPosition, glyrightPosition, glyleftPosition;
+    public static double MAX_SPEED = 1;
+    public static double MIN_SPEED = 0.4;
+    public static double MOTOR_SPEED = 1;
+    public static boolean slow = true;
+    /* Public OpMode members. */
+    public DcMotor rightSideFront, rightSideBack, leftSideFront, leftSideBack, strafe, glyphlift, glyphright, glyphleft = null;
+    public Servo glyphdump, jewel, glyright, glyleft = null;
+    public DeviceInterfaceModule cdim = null;
+    public AdafruitI2cColorSensor sensorRGB = null;
+    public OpticalDistanceSensor odsSensor = null;
+    public BNO055IMU imu = null;
+    public DigitalChannel digitalTouch = null;
     /* local OpMode members. */
     HardwareMap hwMap           =  null;
     private ElapsedTime period  = new ElapsedTime();
 
     /* Constructor */
-    public SeriousHardware(){
-
+    public SeriousHardware() {
     }
 
     /* Initialize standard Hardware interfaces */
-    public void init(HardwareMap hardwareMap) {
+    public void init(HardwareMap ahwMap) {
         // Save reference to Hardware map
-        hwMap = hardwareMap;
+        hwMap = ahwMap;
 
+        strafe = hwMap.get(DcMotor.class, "STR");
+        rightSideFront = hwMap.get(DcMotor.class, "MRF");
+        rightSideBack = hwMap.get(DcMotor.class, "MRB");
+        leftSideFront = hwMap.get(DcMotor.class, "MLF");
+        leftSideBack = hwMap.get(DcMotor.class, "MLB");
+        glyphlift = hwMap.get(DcMotor.class, "LFT");
+        glyphleft = hwMap.get(DcMotor.class, "GLYL");
+        glyphright = hwMap.get(DcMotor.class, "GLYR");
 
-        strafe = hardwareMap.dcMotor.get("STR");
-        rightSideFront = hardwareMap.dcMotor.get("MRF");
-        rightSideBack = hardwareMap.dcMotor.get("MRB");
-        leftSideFront = hardwareMap.dcMotor.get("MLF");
-        leftSideBack = hardwareMap.dcMotor.get("MLB");
-        glyphlift = hardwareMap.dcMotor.get("LFT");
-        glyphleft = hardwareMap.dcMotor.get("GLYL");
-        glyphright = hardwareMap.dcMotor.get("GLYR");
+        jewel = hwMap.get(Servo.class, "JWL");
+        glyphdump = hwMap.get(Servo.class, "GLY");
+        glyleft = hwMap.get(Servo.class, "GLYSL");
+        glyright = hwMap.get(Servo.class, "GLYSR");
 
-        jewel = hardwareMap.servo.get("JWL");
-        glyphdump = hardwareMap.servo.get("GLY");
-        glyleft = hardwareMap.servo.get("GLYSL");
-        glyright = hardwareMap.servo.get("GLYSR");
+        sensorRGB = (AdafruitI2cColorSensor) hwMap.get("sensor_color");
+        //digitalTouch = hardwareMap.get(DigitalChannel.class, "sensor_digital");
+        //imu = (BNO055IMU)hardwareMap.gyroSensor.get("imu");
+        //odsSensor = hardwareMap.get(OpticalDistanceSensor.class, "sensor_ods");
+        //
 
-        sensorRGB = hardwareMap.colorSensor.get("sensor_color");
 
         //claw = hardwareMap.servo.get("CLAW");
 
@@ -127,11 +117,11 @@ public class SeriousHardware
         glyphleft.setDirection(DcMotor.Direction.FORWARD);
         glyphright.setDirection(DcMotor.Direction.FORWARD);
 
+        leftSideBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightSideBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightSideFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         leftSideFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        leftSideFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        leftSideFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        leftSideFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        leftSideFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        strafe.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 
         jewel.setPosition(1);
@@ -145,5 +135,5 @@ public class SeriousHardware
         glyleftPosition = 1;
         glyrightPosition = 0;
     }
- }
+}
 
