@@ -117,7 +117,7 @@ public class Vuforia3736 extends LinearOpMode {
          * Once you've obtained a license key, copy the string from the Vuforia web site
          * and paste it in to your code onthe next line, between the double quotes.
          */
-        parameters.vuforiaLicenseKey = "ATsODcD/////AAAAAVw2lR...d45oGpdljdOh5LuFB9nDNfckoxb8COxKSFX";
+        parameters.vuforiaLicenseKey = "ATSKisf/////AAAAGUc2Yh9CD0LGk3Dia2LEjAYdsSmUVQWL0upIBfSbNY7uuyqCuf1vkGSobE94Cl4K0J/X3Gq0qbvCuVQTGY/J12rvejNHaM0csIJbJjnFf+ceb1MDnoSCYXd8pdp0GBk8nR7STEj52Vr65Fposbvh+U0c8lp/pnVE5dHq3tih8tYmkp8fqPXlWqLX+i2ATyvv48rC0om5zpmRkXGNWCbh7mzgJpzYYKusPPYopBrLdpeJAxtGsmjii2I0Ub6AJ02pCLuYhOdnLDMUkiOgU6m1/3i2V8VSlUMoWusarb1EYhCoJ5xCoK8TIrSBvDpIFZBdrgueuFPWhmZSlitHTLRaGJZtsHvIPp5KstxzqQtdtwAf";
 
         /*
          * We also indicate which camera on the RC that we wish to use.
