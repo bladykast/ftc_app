@@ -52,10 +52,10 @@ public class BlueRef extends LinearOpMode {
         }
 
         if (robot.sensorRGB.red() > robot.sensorRGB.blue()) {
-            GoForward(0.4);
+            GoBackward(0.4);
 
         } else {
-            GoBackward(0.4);
+            GoForward(0.4);
         }
 
         sleep(500);

@@ -50,17 +50,17 @@ public class BlueAudi extends LinearOpMode {
         }
 
         if (robot.sensorRGB.red() > robot.sensorRGB.blue()) {
-            GoForward(0.4);
+            GoBackward(0.4);
 
             sleep(500);
 
             robot.jewel.setPosition(1);
 
-            GoForward(0.4);
+            GoBackward(0.4);
 
             sleep(1000);
         } else {
-            GoBackward(0.4);
+            GoForward(0.4);
 
             sleep(200);
 
@@ -68,7 +68,7 @@ public class BlueAudi extends LinearOpMode {
 
             sleep(500);
 
-            GoForward(0.4);
+            GoBackward(0.4);
 
             sleep(1500);
         }
