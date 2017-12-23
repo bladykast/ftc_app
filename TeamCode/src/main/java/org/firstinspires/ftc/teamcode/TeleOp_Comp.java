@@ -29,7 +29,7 @@ public class TeleOp_Comp extends OpMode {
 
         robot.init(hardwareMap);
 
-        robot.jewel.setPosition(1);
+        robot.jewel.setPosition(0);
         robot.glyphdump.setPosition(1);
         robot.glyright.setPosition(0.45);
         robot.glyleft.setPosition(0.55);

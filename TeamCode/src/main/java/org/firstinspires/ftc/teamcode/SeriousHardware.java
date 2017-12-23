@@ -46,8 +46,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class SeriousHardware
 {
-    public final static double jewelUp = 1;
-    public final static double jewelDown = 0.5;
+    public final static double jewelUp = 0;
+    public final static double jewelDown = 0.65;
     public final static double glyphdumpUp = 0.1;
     public final static double glyphdumpDown = 1;
     public final static double glyrightUp = 0.1;
@@ -120,7 +120,7 @@ public class SeriousHardware
         strafe.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 
-        jewel.setPosition(1);
+        jewel.setPosition(0);
         glyphdump.setPosition(1);
         glyright.setPosition(0);
         glyleft.setPosition(1);
