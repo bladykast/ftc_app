@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 
@@ -25,8 +24,7 @@ public class BlueRef extends LinearOpMode {
 
         robot.jewel.setPosition(0);
         robot.glyphdump.setPosition(1);
-        robot.glyright.setPosition(0.45);
-        robot.glyleft.setPosition(0.55);
+        robot.gly.setPosition(0.55);
 
 
         // Send telemetry message to signify robot waiting;
@@ -38,7 +36,7 @@ public class BlueRef extends LinearOpMode {
 
         sleep(2000);
 
-        robot.jewel.setPosition(0.65);
+        robot.jewel.setPosition(0.6);
 
         sleep(2000);
 
@@ -75,7 +73,7 @@ public class BlueRef extends LinearOpMode {
     }
 
     public void GoBackward(double power) {
-        GoBackward(-power);
+        GoForward(-power);
     }
 
     public void Stop() {

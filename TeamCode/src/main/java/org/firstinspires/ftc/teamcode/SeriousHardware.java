@@ -32,7 +32,6 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.hardware.adafruit.AdafruitI2cColorSensor;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DeviceInterfaceModule;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -50,16 +49,15 @@ public class SeriousHardware
     public final static double jewelDown = 0.65;
     public final static double glyphdumpUp = 0.1;
     public final static double glyphdumpDown = 1;
-    public final static double glyrightUp = 0.1;
-    public final static double glyrightDown = 0;
-    public final static double glyleftUp = 0.9;
-    public final static double glyleftDown = 1;
+    public final static double glyUp = 0.9;
+    public final static double glyDown = 1;
+    public final static double glyStart = 0.55;
 
     //Servo claw
     //CrServo relicIO, relicUD
 
     public DcMotor rightSideFront, rightSideBack, leftSideFront, leftSideBack, strafe, glyphlift, glyphright, glyphleft = null;
-    public Servo glyphdump, jewel, glyright, glyleft = null;
+    public Servo glyphdump, jewel, gly = null;
     public DeviceInterfaceModule cdim = null;
     public AdafruitI2cColorSensor sensorRGB = null;
     public OpticalDistanceSensor odsSensor = null;
@@ -89,12 +87,11 @@ public class SeriousHardware
 
         jewel = hwMap.get(Servo.class, "JWL");
         glyphdump = hwMap.get(Servo.class, "GLY");
-        glyleft = hwMap.get(Servo.class, "GLYSL");
-        glyright = hwMap.get(Servo.class, "GLYSR");
+        gly = hwMap.get(Servo.class, "GLYSL");
 
         sensorRGB = (AdafruitI2cColorSensor) hwMap.get("sensor_color");
         //digitalTouch = hardwareMap.get(DigitalChannel.class, "sensor_digital");
-        //imu = (BNO055IMU)hardwareMap.gyroSensor.get("imu");
+        imu = (BNO055IMU) hwMap.get("imu");
         //odsSensor = hardwareMap.get(OpticalDistanceSensor.class, "sensor_ods");
         //
 
@@ -115,15 +112,16 @@ public class SeriousHardware
 
         leftSideBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightSideBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rightSideFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        leftSideFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightSideFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftSideFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         strafe.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
+        glyphright.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        glyphleft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        glyphlift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         jewel.setPosition(0);
         glyphdump.setPosition(1);
-        glyright.setPosition(0);
-        glyleft.setPosition(1);
+        gly.setPosition(1);
 
 
     }
