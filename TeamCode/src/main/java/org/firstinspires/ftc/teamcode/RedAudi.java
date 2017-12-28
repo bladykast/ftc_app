@@ -23,8 +23,7 @@ public class RedAudi extends LinearOpMode {
 
         robot.jewel.setPosition(0);
         robot.glyphdump.setPosition(1);
-        robot.glyright.setPosition(0.45);
-        robot.glyleft.setPosition(0.55);
+        robot.gly.setPosition(0.55);
 
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Status", "Ready to run");    //
@@ -48,7 +47,7 @@ public class RedAudi extends LinearOpMode {
             telemetry.update();
         }
 
-        if (robot.sensorRGB.red() > robot.sensorRGB.blue()) {
+        if (robot.sensorRGB.red() >= robot.sensorRGB.blue()) {
             GoForward(0.4);
         } else {
             GoBackward(0.4);
@@ -71,7 +70,7 @@ public class RedAudi extends LinearOpMode {
     }
 
     public void GoBackward(double power) {
-        GoBackward(-power);
+        GoForward(-power);
     }
 
     public void Stop() {

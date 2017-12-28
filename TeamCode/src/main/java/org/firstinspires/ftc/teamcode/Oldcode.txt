@@ -1,0 +1,66 @@
+ /*
+
+    OLD Glyph code
+
+        if (gamepad1.y) {
+            glyrightPosition = glyrightUp;
+            glyleftPosition = glyleftUp;
+        }
+        if (gamepad1.b) {
+            glyrightPosition = glyrightDown;
+            glyleftPosition = glyleftDown;
+        }
+
+        if (gamepad1.right_trigger > 0) {
+            glyrightPosition = glyrightStart;
+            glyleftPosition = glyleftStart;
+        }
+
+        if (gamepad1.left_trigger > 0) {
+            glyrightPosition = glyrightDown;
+            glyleftPosition = glyleftDown;
+        }
+
+        */
+
+
+
+
+		//Relic Code
+
+        //relicUD.setPower(y4);
+
+		//if (gamepad2.dpad_left)
+        //{
+        //    relicIO.setPower(1);
+        //}
+        //else if (gamepad2.dpad_right)
+        //{
+        //    relicIO.setPower(-1);
+        //}
+        //else relicIO.setPower(0);
+
+        //if (gamepad2.b)
+        //{
+        //    clawPosition = clawIn;
+        //}
+        //if (gamepad2.y)
+        //{
+        //    clawPosition = clawOut;
+        //}
+
+
+        //Super Mario linear code (hold more to go further...)
+
+        //if (gamepad2.x)
+        //{
+        //    glyphdumpPosition =+ glyphDelta;
+        //}
+
+        //if (gamepad2.a)
+        //{
+        //    glyphdumpPosition =- glyphDelta;
+        //}
+
+		//jewelPosition = Range.clip(jewelPosition, JEWEL_MIN_RANGE, JEWEL_MAX_RANGE);
+        //glyphdumpPosition = Range.clip(glyphdumpPosition, GLYPHDUMP_MIN_RANGE, GLYPHDUMP_MAX_RANGE);
