@@ -123,8 +123,6 @@ public class SeriousHardware
         glyphdump.setPosition(1);
         gly.setPosition(1);
 
-        //k
-
 
     }
 }
