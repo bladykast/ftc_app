@@ -26,6 +26,12 @@ public class TeleOp_Comp extends OpMode {
 
         robot.init(hardwareMap);
 
+        robot.leftSideBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.rightSideBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.rightSideFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.leftSideFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.strafe.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
         robot.leftSideBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         robot.rightSideBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         robot.rightSideFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -120,6 +126,8 @@ public class TeleOp_Comp extends OpMode {
         telemetry.addData("Dump", "Pos:  " + String.format("%.2f", glyphdumpPosition));
         telemetry.addData("Wheel", "Pos:  " + String.format("%.2f", glyPosition));
         telemetry.addData("Motor Speed", "Speed:  " + String.format("%.2f", MOTOR_SPEED));
+        telemetry.addData("STR", "Speed:  " + String.format("%7d", robot.strafe.getCurrentPosition()));
+        telemetry.update();
     }
 
 
