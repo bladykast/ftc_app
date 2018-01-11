@@ -216,22 +216,44 @@ public class Vuforia3736 extends LinearOpMode {
             telemetry.update();
         }
         if (robot.sensorRGB.red() >= robot.sensorRGB.blue()) {
-            GyroDrive(0.4, 3, 0);
+            gyroDrive(0.4, 3, 0);
         } else {
-            GyroDrive(0.4,-3, 0);
-            GyroDrive(0.4,6, 0);
+            gyroDrive(0.4,-3, 0);
+            gyroDrive(0.4,6, 0);
         }
 
         robot.jewel.setPosition(0);
 
+        gyroDrive(DRIVE_SPEED, 9, 0);
 
+        sleep(500);
 
+        gyroTurn(TURN_SPEED, 90);
+        gyroHold(TURN_SPEED, 90, 0.5);
+
+        sleep(500);
+
+        telemetry.addData("Going", "%", LCR);
+
+        //This is going to be our LCR test loop, change distance values for the bot
+        if (LCR == "LEFT") {
+            gyroDrive(DRIVE_SPEED, 24, 90);
+        } else if (LCR == "CENTER") {
+            gyroDrive(DRIVE_SPEED, 18, 90);
+        } else if (LCR == "RIGHT") {
+            gyroDrive(DRIVE_SPEED, 12, 90);
+        } else  {
+            //Go to the center of the cryptobox if nothing is registered
+            gyroDrive(DRIVE_SPEED, 12, 90);
+        }
+
+        gyroTurn(TURN_SPEED, 0);
 
 
     }
 
 
-    public void GyroDrive ( double speed,
+    public void gyroDrive ( double speed,
                         double distance, double angle) {
 
         int     newLeftFrontTarget;
