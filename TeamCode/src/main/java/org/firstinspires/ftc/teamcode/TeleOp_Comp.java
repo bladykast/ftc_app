@@ -111,7 +111,7 @@ public class TeleOp_Comp extends OpMode {
         }
 
 
-        glyPosition = Range.scale(gamepad1.right_trigger, 0, 1, 1, 0.55);
+        glyPosition = Range.scale(gamepad1.right_trigger, 0, 1, 1, 0.40);
 
 
 		//jewel.setPosition(jewelPosition);
