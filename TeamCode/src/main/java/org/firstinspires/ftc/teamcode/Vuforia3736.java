@@ -58,7 +58,11 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.firstinspires.ftc.teamcode.SeriousHardware.glyleftDown;
+import static org.firstinspires.ftc.teamcode.SeriousHardware.glyleftUp;
 import static org.firstinspires.ftc.teamcode.SeriousHardware.glyphdumpUp;
+import static org.firstinspires.ftc.teamcode.SeriousHardware.glyrightDown;
+import static org.firstinspires.ftc.teamcode.SeriousHardware.glyrightUp;
 
 /**
  This is the 2017-2018 Relic Recovery Code, integrating Drive-By-Encoder, the BNO055 IMU, an Adafruit RGB Sensor, and Vuforia.
@@ -223,16 +227,20 @@ public class Vuforia3736 extends LinearOpMode {
         //Knock jewels off corresponding to the alliance color
         if (robot.sensorRGB.red() >= robot.sensorRGB.blue()) {
             gyroDrive(0.4, 3, 0);
+            sleep(500);
+            robot.jewel.setPosition(0);
+
         } else {
             gyroDrive(0.4,-3, 0);
+            sleep(500);
+            robot.jewel.setPosition(0);
             gyroDrive(0.4,6, 0);
         }
 
         //Jewel arm up
-        robot.jewel.setPosition(0);
 
-        //Drive forward 9 inches and turn 90 degrees
-        gyroDrive(DRIVE_SPEED, 9, 0);
+        //Drive forward 12 inches and turn 90 degrees
+        gyroDrive(DRIVE_SPEED, 15, 0);
 
         sleep(500);
 
@@ -243,7 +251,7 @@ public class Vuforia3736 extends LinearOpMode {
 
 
         //This is going to be our LCR test loop, change distance values for the bot
-        telemetry.addData("Going", "%", LCR);
+        telemetry.addData("Going", "%s", LCR);
         if (LCR == "LEFT") {
             gyroDrive(DRIVE_SPEED, 24, 90);
         } else if (LCR == "CENTER") {
@@ -257,15 +265,27 @@ public class Vuforia3736 extends LinearOpMode {
 
         gyroTurn(TURN_SPEED, 0);
 
-        //
-        /*
-        robot.gly.setPosition(1);
+        //Put glyph servos down, dump glyph, and put them back up and ram
+        robot.glyleft.setPosition(glyleftDown);
+        robot.glyright.setPosition(glyrightDown);
+        sleep(1500);
+
         robot.glyphdump.setPosition(glyphdumpUp);
-        robot.gly.setPosition(0.4);
+
+        runtime.reset();
+        while (opModeIsActive() && (runtime.seconds() < 2)) {
+            robot.glyphright.setPower(1);
+            robot.glyphleft.setPower(1);
+        }
+        robot.glyphright.setPower(0);
+        robot.glyphleft.setPower(0);
+
+        sleep(500);
+
+        robot.glyleft.setPosition(glyleftUp);
+        robot.glyright.setPosition(glyrightUp);
 
         gyroDrive(DRIVE_SPEED, 3, 0);
-        */
-
 
     }
 

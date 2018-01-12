@@ -6,15 +6,17 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 
 import static org.firstinspires.ftc.teamcode.SeriousHardware.glyStart;
+import static org.firstinspires.ftc.teamcode.SeriousHardware.glyleftUp;
 import static org.firstinspires.ftc.teamcode.SeriousHardware.glyphdumpDown;
 import static org.firstinspires.ftc.teamcode.SeriousHardware.glyphdumpUp;
+import static org.firstinspires.ftc.teamcode.SeriousHardware.glyrightUp;
 
 
 @TeleOp(name = "3736: TeleOp", group = "TeleOp")
 
 public class TeleOp_Comp extends OpMode {
 
-    public static double jewelPosition, glyphdumpPosition, glyPosition;
+    public static double jewelPosition, glyphdumpPosition, glyleftPosition, glyrightPosition;
     public static double MAX_SPEED = 1;
     public static double MIN_SPEED = 0.4;
     public static double MOTOR_SPEED = 1;
@@ -40,11 +42,13 @@ public class TeleOp_Comp extends OpMode {
 
         robot.jewel.setPosition(0);
         robot.glyphdump.setPosition(1);
-        robot.gly.setPosition(glyStart);
+        robot.glyleft.setPosition(glyleftUp);
+        robot.glyright.setPosition(glyrightUp);
 
         jewelPosition = 1;
         glyphdumpPosition = 1;
-        glyPosition = 1;
+        glyleftPosition = glyleftUp;
+        glyrightPosition = glyrightUp;
     }
 
 	public void loop()
@@ -111,22 +115,24 @@ public class TeleOp_Comp extends OpMode {
         }
 
 
-        glyPosition = Range.scale(gamepad1.right_trigger, 0, 1, 1, 0.40);
+        glyleftPosition = Range.scale(gamepad1.right_trigger, 0, 1, 0.96, 0.40);
+        glyrightPosition =  Range.scale(gamepad1.right_trigger, 0, 1, 0, 0.60);
 
 
 		//jewel.setPosition(jewelPosition);
         //claw.setPosition(clawPosition);
 
-        robot.gly.setPosition(glyPosition);
+        robot.glyleft.setPosition(glyleftPosition);
+        robot.glyright.setPosition(glyrightPosition);
         robot.glyphdump.setPosition(glyphdumpPosition);
 
 		telemetry.addData("Text", "*** Robot Data***");
 		//telemetry.addData("jewel", "jewel:  " + String.format("%.2f", jewelPosition));
         //telemetry.addData("claw", "claw:  " + String.format("%.2f", clawPosition));
         telemetry.addData("Dump", "Pos:  " + String.format("%.2f", glyphdumpPosition));
-        telemetry.addData("Wheel", "Pos:  " + String.format("%.2f", glyPosition));
+        telemetry.addData("Left", "Pos:  " + String.format("%.2f", glyleftPosition));
+        telemetry.addData("Right", "Pos:  " + String.format("%.2f", glyrightPosition));
         telemetry.addData("Motor Speed", "Speed:  " + String.format("%.2f", MOTOR_SPEED));
-        telemetry.addData("STR", "Speed:  " + String.format("%7d", robot.strafe.getCurrentPosition()));
         telemetry.update();
     }
 

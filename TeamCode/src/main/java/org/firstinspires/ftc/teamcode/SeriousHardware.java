@@ -49,15 +49,17 @@ public class SeriousHardware
     public final static double jewelDown = 0.65;
     public final static double glyphdumpUp = 0.1;
     public final static double glyphdumpDown = 1;
-    public final static double glyUp = 0.9;
-    public final static double glyDown = 1;
+    public final static double glyleftUp = 0.4;
+    public final static double glyleftDown = 0.96;
+    public final static double glyrightUp = 0.6;
+    public final static double glyrightDown = 0;
     public final static double glyStart = 0.55;
 
     //Servo claw
     //CrServo relicIO, relicUD
 
     public DcMotor rightSideFront, rightSideBack, leftSideFront, leftSideBack, strafe, glyphlift, glyphright, glyphleft = null;
-    public Servo glyphdump, jewel, gly = null;
+    public Servo glyphdump, jewel, glyleft, glyright = null;
     public DeviceInterfaceModule cdim = null;
     public AdafruitI2cColorSensor sensorRGB = null;
     public OpticalDistanceSensor odsSensor = null;
@@ -87,7 +89,10 @@ public class SeriousHardware
 
         jewel = hwMap.get(Servo.class, "JWL");
         glyphdump = hwMap.get(Servo.class, "GLY");
-        gly = hwMap.get(Servo.class, "GLYSL");
+        glyleft = hwMap.get(Servo.class, "GLYSL");
+        glyright = hwMap.get(Servo.class, "GLYSR");
+
+
 
         sensorRGB = (AdafruitI2cColorSensor) hwMap.get("sensor_color");
         //digitalTouch = hardwareMap.get(DigitalChannel.class, "sensor_digital");
@@ -121,7 +126,8 @@ public class SeriousHardware
 
         jewel.setPosition(0);
         glyphdump.setPosition(1);
-        gly.setPosition(1);
+        glyleft.setPosition(glyleftUp);
+        glyright.setPosition(glyrightUp);
 
 
     }
