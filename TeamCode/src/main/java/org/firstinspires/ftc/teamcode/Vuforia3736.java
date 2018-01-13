@@ -68,8 +68,15 @@ import static org.firstinspires.ftc.teamcode.SeriousHardware.glyrightUp;
  This is the 2017-2018 Relic Recovery Code, integrating Drive-By-Encoder, the BNO055 IMU, an Adafruit RGB Sensor, and Vuforia.
  */
 
-@Autonomous(name="Red Audience Side WFU", group ="Concept")
+@Autonomous(name="Red Ref Side WFU", group ="Concept")
 public class Vuforia3736 extends LinearOpMode {
+
+    // Define if Red or Blue side, and if audience or ref side.
+    boolean Red = true;
+    boolean Blue = false;
+
+    boolean Audience = true;
+    boolean Ref = false;
 
     /* Declare OpMode members. */
     SeriousHardware         robot   = new SeriousHardware();   // Use a Pushbot's hardware
