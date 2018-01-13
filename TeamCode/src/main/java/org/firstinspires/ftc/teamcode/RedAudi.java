@@ -261,7 +261,7 @@ public class RedAudi extends LinearOpMode {
             gyroDrive(DRIVE_SPEED, 18, 90);
         }
 
-        gyroTurn(TURN_SPEED, 90);
+        gyroTurn(TURN_SPEED, -90);
 
         //Put glyph servos down, dump glyph, and put them back up and ram
         robot.glyleft.setPosition(glyleftDown);
@@ -272,8 +272,8 @@ public class RedAudi extends LinearOpMode {
 
         runtime.reset();
         while (opModeIsActive() && (runtime.seconds() < 2)) {
-            robot.glyphright.setPower(-1);
-            robot.glyphleft.setPower(-1);
+            robot.glyphright.setPower(1);
+            robot.glyphleft.setPower(1);
         }
         robot.glyphright.setPower(0);
         robot.glyphleft.setPower(0);
@@ -283,8 +283,11 @@ public class RedAudi extends LinearOpMode {
         robot.glyleft.setPosition(glyleftUp);
         robot.glyright.setPosition(glyrightUp);
 
-        gyroDrive(DRIVE_SPEED, 3, 0);
+        gyroDrive(DRIVE_SPEED, 4, 0);
 
+        sleep(1000);
+
+        gyroDrive(DRIVE_SPEED, -2, 0);
     }
 
 

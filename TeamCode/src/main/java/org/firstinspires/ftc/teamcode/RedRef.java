@@ -281,8 +281,8 @@ public class RedRef extends LinearOpMode {
 
         runtime.reset();
         while (opModeIsActive() && (runtime.seconds() < 2)) {
-            robot.glyphright.setPower(-1);
-            robot.glyphleft.setPower(-1);
+            robot.glyphright.setPower(1);
+            robot.glyphleft.setPower(1);
         }
         robot.glyphright.setPower(0);
         robot.glyphleft.setPower(0);
@@ -292,8 +292,11 @@ public class RedRef extends LinearOpMode {
         robot.glyleft.setPosition(glyleftUp);
         robot.glyright.setPosition(glyrightUp);
 
-        gyroDrive(DRIVE_SPEED, 3, 0);
+        gyroDrive(DRIVE_SPEED, 4, 0);
 
+        sleep(1000);
+
+        gyroDrive(DRIVE_SPEED, -2, 0);
     }
 
 

@@ -223,16 +223,29 @@ public class BlueRef extends LinearOpMode {
 
         //Check color 10 times (for consistency)
         for(int i = 0; i < 10; ++i) {
-            telemetry.addData("Clear", (robot.sensorRGB.alpha()) / 256);
-            telemetry.addData("Red  ", (robot.sensorRGB.red()) / 256);
-            telemetry.addData("Green", (robot.sensorRGB.green()) / 256);
-            telemetry.addData("Blue ", (robot.sensorRGB.blue()) / 256);
+            telemetry.addData("Clear", robot.sensorRGB.alpha());
+            telemetry.addData("Red  ", robot.sensorRGB.red());
+            telemetry.addData("Green", robot.sensorRGB.green());
+            telemetry.addData("Blue ", robot.sensorRGB.blue());
 
             telemetry.update();
         }
 
         //Knock jewels off corresponding to the alliance color
-        if (robot.sensorRGB.red() <= robot.sensorRGB.blue()) {
+        if (robot.sensorRGB.red() == 0 && robot.sensorRGB.blue() == 0)
+        {
+            robot.jewel.setPosition(0);
+            sleep(500);
+            gyroDrive(0.4, -3, 0);
+        }
+
+        else  if (robot.sensorRGB.red() >= 65535 && robot.sensorRGB.blue() >= 65535){
+            robot.jewel.setPosition(0);
+            sleep(500);
+            gyroDrive(0.4, -3, 0);
+        }
+
+        else if (robot.sensorRGB.red() <= robot.sensorRGB.blue()) {
             gyroDrive(0.4, 3, 0);
             robot.jewel.setPosition(0);
             sleep(500);
@@ -246,14 +259,12 @@ public class BlueRef extends LinearOpMode {
         }
 
         //Jewel arm up
-
-        //Drive forward 12 inches and turn 90 degrees
-        gyroDrive(DRIVE_SPEED, 15, 0);
+        gyroDrive(0.4, -15, 0);
 
         sleep(500);
 
-        gyroTurn(TURN_SPEED, -90);
-        gyroHold(TURN_SPEED, -90, 0.5);
+        gyroTurn(TURN_SPEED, 90);
+        gyroHold(TURN_SPEED, 90, 0.5);
 
         sleep(500);
 
@@ -272,6 +283,11 @@ public class BlueRef extends LinearOpMode {
         }
 
         gyroTurn(TURN_SPEED, 180);
+        gyroHold(TURN_SPEED, 180, 0.5);
+
+        gyroDrive(DRIVE_SPEED, 8, 180);
+        sleep(1000);
+        gyroDrive(DRIVE_SPEED, 2, 180);
 
         //Put glyph servos down, dump glyph, and put them back up and ram
         robot.glyleft.setPosition(glyleftDown);
@@ -282,8 +298,8 @@ public class BlueRef extends LinearOpMode {
 
         runtime.reset();
         while (opModeIsActive() && (runtime.seconds() < 2)) {
-            robot.glyphright.setPower(-1);
-            robot.glyphleft.setPower(-1);
+            robot.glyphright.setPower(1);
+            robot.glyphleft.setPower(1);
         }
         robot.glyphright.setPower(0);
         robot.glyphleft.setPower(0);
@@ -293,7 +309,11 @@ public class BlueRef extends LinearOpMode {
         robot.glyleft.setPosition(glyleftUp);
         robot.glyright.setPosition(glyrightUp);
 
-        gyroDrive(DRIVE_SPEED, 3, 0);
+        gyroDrive(DRIVE_SPEED, 4, 0);
+
+        sleep(1000);
+
+        gyroDrive(DRIVE_SPEED, -2, 0);
 
     }
 
