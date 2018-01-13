@@ -33,6 +33,7 @@ import com.qualcomm.hardware.adafruit.AdafruitI2cColorSensor;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -68,7 +69,8 @@ import static org.firstinspires.ftc.teamcode.SeriousHardware.glyrightUp;
  This is the 2017-2018 Relic Recovery Code, integrating Drive-By-Encoder, the BNO055 IMU, an Adafruit RGB Sensor, and Vuforia.
  */
 
-@Autonomous(name="Red Ref Side WFU", group ="Concept")
+@Disabled
+@Autonomous(name="All-In Test", group ="Concept")
 public class Vuforia3736 extends LinearOpMode {
 
     // Define if Red or Blue side, and if audience or ref side.
